@@ -1,0 +1,9 @@
+.con{
+    width: 100%;
+    height: 80vh;
+    /* background-image: url('./leaves.png') */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-shadow: 1px 1px 1px rgba(206, 206, 206, 0.548);
+}
