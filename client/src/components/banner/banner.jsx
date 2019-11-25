@@ -27,7 +27,7 @@ export default function Banner (props) {
         <h1> Unsplash </h1>
         <p> The internet’s source of freely usable images. Powered by creators everywhere. </p>
         <form onSubmit={(e) => props.searchUpsplash(e)} className="d-flex align-items-center justify-content-center">
-          <input onChange={ (e) => props.mySetState( 'q', e.target.value ) } id="search" type="text" className="form-control mr-3" />
+          <input onChange={ (e) => props.mySetState( 'q', e.target.value ) } type="text" id="search" className="form-control mr-3" />
           <input type="submit" value="search" className="btn btn-info" />
         </form>
       </div>
