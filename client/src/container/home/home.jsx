@@ -1,18 +1,34 @@
 import React, { Component } from 'react'
+import qs from 'qs'
 import axios from '../../apis/unsplash'
+import {
+  Link,
+  Route,
+  Switch,
+  withRouter
+} from "react-router-dom";
+
 import Banner from '../../components/banner/banner'
-import Navbar from '../../components/navbar/navbar'
+import PicDetail from '../PicDetail/PicDetail'
 
 import './home.css'
 
-class App extends Component {
+// componentDidUpdate
+
+class Home extends Component {
 
   state= {
-    q: '',
     photos1: [],
     photos2: [],
     photos3: [],
-    isBanner: true
+    isBanner: true,
+  }
+
+  componentDidUpdate(){
+    const{ q }= qs.parse(this.props.location.pathname.slice(1))
+    if(q){
+      this.searchUpsplash(q)
+    }
   }
 
   mySetState = (stateName, value) => {
@@ -21,15 +37,13 @@ class App extends Component {
     })
   }
 
-  searchUpsplash = (e) =>{
-    e.preventDefault()
+  searchUpsplash = (keyword) =>{
     axios({
       method: 'get',
-      url: `/search/photos?query=${this.state.q}&per_page=30`
+      url: `/search/photos?query=${keyword}&per_page=30`
     })
     .then(({data})=>{
       document.getElementById('search').value = ''
-      document.getElementById('search-nav').value = ''
       let p1 = data.results.slice(0, 10)
       let p2 = data.results.slice(10, 20)
       let p3 = data.results.slice(20, 30)
@@ -44,7 +58,6 @@ class App extends Component {
       url: `/photos?per_page=30`
     })
     .then(({data})=>{
-      console.log(data.length);
       let p1 = data.slice(0, 10)
       let p2 = data.slice(10, 20)
       let p3 = data.slice(20, 30)
@@ -56,32 +69,37 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar searchUpsplash={ this.searchUpsplash } mySetState={ this.mySetState } />
-        <Banner searchUpsplash={ this.searchUpsplash } mySetState={ this.mySetState }/>
-          
-
+        
+        <Banner />
+  
         <div className="pic-con d-flex justify-content-center flex-wrap">
 
           <div className="pic-card">
             {
-              this.state.photos1.map((v, i) => <img key={i} src={v.urls.regular} alt=""/>)
+              this.state.photos1.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
           <div className="pic-card">
             {
-              this.state.photos2.map((v, i) => <img key={i} src={v.urls.regular} alt=""/>)
+              this.state.photos2.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
           <div className="pic-card">
             {
-              this.state.photos3.map((v, i) => <img key={i} src={v.urls.regular} alt=""/>)
+              this.state.photos3.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
         </div>
+
+          <Switch>
+            <Route path="/pic/:id">
+                <PicDetail />
+            </Route>
+          </Switch>
 
       </div>
     )
   }
 }
 
-export default App;
+export default withRouter(Home);

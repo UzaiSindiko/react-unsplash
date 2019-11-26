@@ -1,0 +1,31 @@
+.pic-detail-con {
+    position: fixed; /* Stay in place */
+    z-index: 1020; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0, 0, 0, 0.233)
+}
+
+.detail-con{
+    width: 90%;
+    height: 95%;
+    border-radius: 15px;
+    background: white;
+    padding: 30px;
+    overflow: auto;
+}
+
+.detail-pic-con{
+    width: 100%;
+    height: 100%;
+}
+
+.detail-pic-con img{
+    max-width: 500px;
+    margin-bottom: 200px;
+    height: auto;
+    object-fit: cover;
+}

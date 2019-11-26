@@ -4,12 +4,13 @@
     padding: 10px;
   }
   
-  .pic-card img{
-    width: 100%;
-    height: auto;
-    padding: 10px;
-  } 
-  
-  .pic-card{
-    width: 33%;
-  }
+.pic-card img{
+  width: 100%;
+  height: auto;
+  padding: 10px;
+  cursor: zoom-in;
+} 
+
+.pic-card{
+  width: 33%;
+}
