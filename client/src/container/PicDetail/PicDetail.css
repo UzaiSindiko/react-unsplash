@@ -14,8 +14,22 @@
     height: 95%;
     border-radius: 15px;
     background: white;
-    padding: 30px;
     overflow: auto;
+}
+
+.detail-nav{
+    width: 100%;
+    height: 50px;
+    padding: 10px 20px;
+    background-color: white;
+}
+
+.detail-nav img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 30px 0;
 }
 
 .detail-pic-con{
@@ -24,8 +38,13 @@
 }
 
 .detail-pic-con img{
+    margin-top: 50px;
     max-width: 500px;
     margin-bottom: 200px;
     height: auto;
     object-fit: cover;
+}
+
+.detail-con a{
+    text-decoration: none;
 }

@@ -76,17 +76,17 @@ class Home extends Component {
 
           <div className="pic-card">
             {
-              this.state.photos1.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
+              this.state.photos1.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
           <div className="pic-card">
             {
-              this.state.photos2.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
+              this.state.photos2.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
           <div className="pic-card">
             {
-              this.state.photos3.map((v, i) => <Link to={`pic/${v.id}`}> <img key={v.id} src={v.urls.regular} alt=""/> </Link>)
+              this.state.photos3.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
         </div>
