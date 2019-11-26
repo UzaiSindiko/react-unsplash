@@ -38,32 +38,32 @@ class Home extends Component {
   }
 
   searchUpsplash = (keyword) =>{
-    axios({
-      method: 'get',
-      url: `/search/photos?query=${keyword}&per_page=30`
-    })
-    .then(({data})=>{
-      document.getElementById('search').value = ''
-      let p1 = data.results.slice(0, 10)
-      let p2 = data.results.slice(10, 20)
-      let p3 = data.results.slice(20, 30)
-      this.setState({ photos1: p1 , photos2: p2, photos3: p3})
-    })
-    .catch(console.log)
+    // axios({
+    //   method: 'get',
+    //   url: `/search/photos?query=${keyword}&per_page=30`
+    // })
+    // .then(({data})=>{
+    //   document.getElementById('search').value = ''
+    //   let p1 = data.results.slice(0, 10)
+    //   let p2 = data.results.slice(10, 20)
+    //   let p3 = data.results.slice(20, 30)
+    //   this.setState({ photos1: p1 , photos2: p2, photos3: p3})
+    // })
+    // .catch(console.log)
   }
 
   componentDidMount(){
-    axios({
-      method: 'get',
-      url: `/photos?per_page=30`
-    })
-    .then(({data})=>{
-      let p1 = data.slice(0, 10)
-      let p2 = data.slice(10, 20)
-      let p3 = data.slice(20, 30)
-      this.setState({ photos1: p1 , photos2: p2, photos3: p3})
-    })
-    .catch(console.log)
+    // axios({
+    //   method: 'get',
+    //   url: `/photos?per_page=30`
+    // })
+    // .then(({data})=>{
+    //   let p1 = data.slice(0, 10)
+    //   let p2 = data.slice(10, 20)
+    //   let p3 = data.slice(20, 30)
+    //   this.setState({ photos1: p1 , photos2: p2, photos3: p3})
+    // })
+    // .catch(console.log)
   }
 
   render() {

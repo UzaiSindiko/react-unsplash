@@ -20,17 +20,17 @@ export default function Banner (props) {
   }
 
   useEffect(()=>{
-    let random = Math.floor(Math.random() * 11)
-    axios({
-      method: 'get',
-      url: '/search/photos?query=wallpapers&per_page=10'
-    })
-    .then(({data}) =>{
-      setBgImage({
-        backgroundImage: `url("${data.results[random].urls.raw}")`
-      })
-    })
-    .catch(console.log)
+    // let random = Math.floor(Math.random() * 11)
+    // axios({
+    //   method: 'get',
+    //   url: '/search/photos?query=wallpapers&per_page=10'
+    // })
+    // .then(({data}) =>{
+    //   setBgImage({
+    //     backgroundImage: `url("${data.results[random].urls.raw}")`
+    //   })
+    // })
+    // .catch(console.log)
   }, [])
   
   return (<div style={bgImage} className="con d-flex align-items-center justify-content-center">

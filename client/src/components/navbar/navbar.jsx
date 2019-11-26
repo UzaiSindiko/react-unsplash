@@ -15,6 +15,10 @@ export default function Navbar (props) {
     setKeyword('')
   }
 
+  function handleClick(q){
+    history.push(`/q=${q}`)
+  }
+
     return (
         <div className="sticky-top">
      <nav>
@@ -36,18 +40,18 @@ export default function Navbar (props) {
             </div>
           </div>
           <div className="search-word d-flex justify-content-between">
-            <span>Wallpapers</span>
-            <span>Textures & Patterns</span>
-            <span>Nature</span>
-            <span>Current Events</span>
-            <span>Architecture</span>
-            <span>Business & Work</span>
-            <span>Film</span>
-            <span>Animals</span>
-            <span>Travel</span>
-            <span>Fashion</span>
-            <span>Food & Drink</span>
-            <span>Experimental</span>
+            <span onClick={ () => handleClick('Wallpapers') } >Wallpapers</span>
+            <span onClick={ () => handleClick('Textures & Patterns') } >Textures & Patterns</span>
+            <span onClick={ () => handleClick('Nature') } >Nature</span>
+            <span onClick={ () => handleClick('Current Events') } >Current Events</span>
+            <span onClick={ () => handleClick('Architecture') } >Architecture</span>
+            <span onClick={ () => handleClick('Business & Work') } >Business & Work</span>
+            <span onClick={ () => handleClick('Film') } >Film</span>
+            <span onClick={ () => handleClick('Animals') } >Animals</span>
+            <span onClick={ () => handleClick('Travel') } >Travel</span>
+            <span onClick={ () => handleClick('Fashion') } >Fashion</span>
+            <span onClick={ () => handleClick('Food & Drink') } >Food & Drink</span>
+            <span onClick={ () => handleClick('Experimental') } >Experimental</span>
           </div>
         </nav>
         </div>
