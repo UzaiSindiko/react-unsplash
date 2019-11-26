@@ -35,7 +35,7 @@ export default function PicDetail() {
 
     return (
         <div className="pic-detail-con d-flex align-items-center justify-content-center">
-            <div className="animated zoomIn	detail-con">
+            <div className="animated zoomIn	detail-con" >
                 <div className="detail-nav sticky-top d-flex justify-content-between">
                 <div className=" d-flex ">
                     <Link style={{ textDecoration: 'none' }} to="/">
