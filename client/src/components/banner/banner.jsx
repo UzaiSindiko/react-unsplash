@@ -1,15 +1,17 @@
 import React, { useState, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { getBg } from '../../store/actions'
+
 import './banner.css'
-import axios from '../../apis/unsplash'
+// import axios from '../../apis/unsplash'
 import {
   useHistory
 } from "react-router-dom";
 
 export default function Banner (props) {
 
-  const [bgImage,setBgImage] = useState({
-    backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQR0MSXI_hwdeKRskkXc20kuHaPm_hAOvGGqtdwsjcsEE_qUxnu")`
-  })
+  const dispacth = useDispatch()
+  const { bgImage } = useSelector(state => state.picture )
 
   const [keyword, setKeyword] = useState('')
   let history = useHistory()
@@ -20,17 +22,7 @@ export default function Banner (props) {
   }
 
   useEffect(()=>{
-    let random = Math.floor(Math.random() * 10)
-    axios({
-      method: 'get',
-      url: '/search/photos?query=wallpapers&per_page=10'
-    })
-    .then(({data}) =>{
-      setBgImage({
-        backgroundImage: `url("${data.results[random].urls.raw}")`
-      })
-    })
-    .catch(console.log)
+    dispacth(getBg())
   }, [])
   
   return (<div style={bgImage} className="con d-flex align-items-center justify-content-center">

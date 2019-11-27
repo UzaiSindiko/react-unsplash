@@ -4,14 +4,17 @@ import {
     Redirect,
     useLocation
   } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
 
 export default function PrivateRoute(props) {
     const location = useLocation()
 
+    const { isLogin } = useSelector(state => state.users )
+
     return (
         <Route path={props.path}>
             {
-                props.login // better use global state management
+                isLogin // better use global state management
                 ? props.children // 
                 : <Redirect
                     to={{

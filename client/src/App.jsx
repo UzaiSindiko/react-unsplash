@@ -18,27 +18,19 @@ import './App.css'
 
 class App extends Component {
 
-  state = {
-    isLogin: true,
-  }
-
-  setLogin = (value) => {
-    this.setState({ isLogin: value })
-  }
-
   render() {
     return (
       <Provider store={ store }>
         <Router>
           <Switch>
 
-              <PrivateRoute login={this.state.isLogin} path="/collections">
+              <PrivateRoute path="/collections">
                 <Navbar />
                 <Collections />
               </PrivateRoute>
               
               <Route path="/login">
-                {this.state.isLogin ? <Redirect to="/" /> : <Login setLogin={ this.setLogin } />}
+                { localStorage.getItem('token') ? <Redirect to="/" /> : <Login />}
               </Route>
 
               <Route path="/try">

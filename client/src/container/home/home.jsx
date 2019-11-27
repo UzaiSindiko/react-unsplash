@@ -10,7 +10,7 @@ import {
 import Banner from '../../components/banner/banner'
 import PicDetail from '../PicDetail/PicDetail'
 import { connect } from 'react-redux'
-import { getPhotos, searchPhotos } from '../../store/actions'
+import { getPhotos, searchPhotos, isLogin } from '../../store/actions'
 
 import './home.css'
 
@@ -54,6 +54,10 @@ class Home extends Component {
       this.searchUpsplash(q)
     } else {
       this.props.getPhotos()
+    }
+
+    if(localStorage.getItem('token')){
+      this.props.isLogin()
     }
   }
 
@@ -103,7 +107,8 @@ function mapStateToProps( state ){
 const mapDispatchToProps = dispatch => {
   return {
     getPhotos: () => dispatch(getPhotos()),
-    searchPhotos: (q) => dispatch(searchPhotos(q))
+    searchPhotos: (q) => dispatch(searchPhotos(q)),
+    isLogin: () => dispatch(isLogin())
   }
 }
 

@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './Collection.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { setDec, setInc } from '../../store/actions'
+import { setDec, setInc, isLogin } from '../../store/actions'
 
 export default function Collection() {
 
-    const count = useSelector(state => state.counter).count
     const dispatch = useDispatch()
+
+    useEffect( () => {
+      if(localStorage.getItem('token')){
+        dispatch(isLogin())
+      }
+    }, [])
 
     return (
       <div>
-          <h1>{count}</h1>
-          <button onClick={() => dispatch(setInc()) } >INC</button>
-          <button onClick={() => dispatch(setDec()) } >DEC</button>
+
       </div>
     )
 }

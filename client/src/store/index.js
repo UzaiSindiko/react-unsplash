@@ -17,17 +17,25 @@ function counter(state = initCount, action) {
 }
 
 const initPicture = {
+    bgImage: {
+        backgroundImage: `url("https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQR0MSXI_hwdeKRskkXc20kuHaPm_hAOvGGqtdwsjcsEE_qUxnu")`
+    },
     photos1: [],
     photos2: [],
     photos3: [],
     pic: '',
     profilePic: '',
     name: '',
-    linkDownload: ''
+    linkDownload: '',
 }
 
 function picture(state = initPicture, action){
     switch (action.type) {
+        case 'GET_BG':
+            return {
+                ...state,
+                bgImage: action.bgImage
+            }
         case 'GET_PHOTOS':
             return {
                 ...state,
@@ -48,8 +56,36 @@ function picture(state = initPicture, action){
     }
 }
 
+const initUsers = {
+    isLogin : false
+}
 
-const rootReducer = combineReducers({ counter, picture })
+function users( state = initUsers, action ){
+    switch (action.type) {
+        case 'LOGIN':
+            if(action.token)
+            localStorage.setItem('token', action.token)
+            return {
+                ...state,
+                isLogin: true
+            }
+        case 'IS_LOGIN':
+                return {
+                    ...state,
+                    isLogin: true
+                }
+        case 'LOGOUT':
+            localStorage.removeItem('token')
+            return {
+                ...state,
+                isLogin: false
+            }
+        default:
+            return state
+    }
+}
+
+const rootReducer = combineReducers({ counter, picture, users })
 
 const store = createStore(rootReducer, applyMiddleware(thunk))
 
