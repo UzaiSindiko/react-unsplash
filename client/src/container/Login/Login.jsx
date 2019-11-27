@@ -16,7 +16,7 @@ export default function Login(props) {
     })
 
     useEffect(()=>{
-        let random = Math.floor(Math.random() * 11)
+        let random = Math.floor(Math.random() * 10)
         axios({
           method: 'get',
           url: '/search/photos?query=wallpapers&per_page=10'

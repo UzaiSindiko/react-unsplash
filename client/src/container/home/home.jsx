@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import qs from 'qs'
-import axios from '../../apis/unsplash'
 import {
   Link,
   Route,
@@ -10,6 +9,8 @@ import {
 
 import Banner from '../../components/banner/banner'
 import PicDetail from '../PicDetail/PicDetail'
+import { connect } from 'react-redux'
+import { getPhotos, searchPhotos } from '../../store/actions'
 
 import './home.css'
 
@@ -17,17 +18,23 @@ import './home.css'
 
 class Home extends Component {
 
+  // kenang kenang-kenangan jangan dihapus
   state= {
-    photos1: [],
-    photos2: [],
-    photos3: [],
-    isBanner: true,
+    // photos1: [],
+    // photos2: [],
+    // photos3: [],
+    // isBanner: true,
   }
 
-  componentDidUpdate(){
-    const{ q }= qs.parse(this.props.location.pathname.slice(1))
-    if(q){
+  componentDidUpdate(prevProps){
+    const prev = qs.parse(prevProps.location.search.slice(1)).q
+    const current = qs.parse(this.props.location.search.slice(1)).q
+    if(current && prev !== current && current !== '' ){
+      const{ q }= qs.parse(this.props.location.search.slice(1))
       this.searchUpsplash(q)
+    } 
+    else if(!current && prev !== current) {
+      this.props.getPhotos()
     }
   }
 
@@ -37,33 +44,17 @@ class Home extends Component {
     })
   }
 
-  searchUpsplash = (keyword) =>{
-    axios({
-      method: 'get',
-      url: `/search/photos?query=${keyword}&per_page=30`
-    })
-    .then(({data})=>{
-      document.getElementById('search').value = ''
-      let p1 = data.results.slice(0, 10)
-      let p2 = data.results.slice(10, 20)
-      let p3 = data.results.slice(20, 30)
-      this.setState({ photos1: p1 , photos2: p2, photos3: p3})
-    })
-    .catch(console.log)
+  searchUpsplash = (q) =>{
+    this.props.searchPhotos(q)
   }
 
   componentDidMount(){
-    axios({
-      method: 'get',
-      url: `/photos?per_page=30`
-    })
-    .then(({data})=>{
-      let p1 = data.slice(0, 10)
-      let p2 = data.slice(10, 20)
-      let p3 = data.slice(20, 30)
-      this.setState({ photos1: p1 , photos2: p2, photos3: p3})
-    })
-    .catch(console.log)
+    const { q } = qs.parse(this.props.location.search.slice(1))
+    if(q && q !== ''){
+      this.searchUpsplash(q)
+    } else {
+      this.props.getPhotos()
+    }
   }
 
   render() {
@@ -71,22 +62,22 @@ class Home extends Component {
       <div>
         
         <Banner />
-  
+
         <div className="pic-con d-flex justify-content-center flex-wrap">
 
           <div className="pic-card">
             {
-              this.state.photos1.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
+              this.props.picture.photos1.map((v, i) => <Link key={v.id}  to={`pic/${v.id}`}> <img className="animated fadeInUp" src={v.urls.regular} alt=""/> </Link>)
+            }
+          </div>
+          <div className="pic-card">
+            { 
+              this.props.picture.photos2.map((v, i) => <Link key={v.id} to={`pic/${v.id}`}> <img className="animated fadeInUp" src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
           <div className="pic-card">
             {
-              this.state.photos2.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
-            }
-          </div>
-          <div className="pic-card">
-            {
-              this.state.photos3.map((v, i) => <Link to={`pic/${v.id}`}> <img className="animated fadeInUp" key={v.id} src={v.urls.regular} alt=""/> </Link>)
+              this.props.picture.photos3.map((v, i) => <Link key={v.id}  to={`pic/${v.id}`}> <img className="animated fadeInUp" src={v.urls.regular} alt=""/> </Link>)
             }
           </div>
         </div>
@@ -102,4 +93,21 @@ class Home extends Component {
   }
 }
 
-export default withRouter(Home);
+
+function mapStateToProps( state ){
+  return {
+    picture: state.picture
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    getPhotos: () => dispatch(getPhotos()),
+    searchPhotos: (q) => dispatch(searchPhotos(q))
+  }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(withRouter(Home))

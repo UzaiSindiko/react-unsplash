@@ -11,12 +11,12 @@ export default function Navbar (props) {
   let history = useHistory()
 
   function handleSubmit(){
-    history.push(`/q=${keyword}`)
+    history.push(`/?q=${keyword}`)
     setKeyword('')
   }
 
   function handleClick(q){
-    history.push(`/q=${q}`)
+    history.push(`/?q=${q}`)
   }
 
     return (

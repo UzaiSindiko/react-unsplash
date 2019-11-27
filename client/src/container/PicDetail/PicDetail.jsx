@@ -1,36 +1,25 @@
-import React, {useState, useEffect} from 'react'
-import axios from '../../apis/unsplash'
+import React, {useEffect} from 'react'
 import './PicDetail.css'
 import {
     Link,
     useParams
   } from "react-router-dom";
+import { useDispatch, useSelector } from 'react-redux'
+import { getPhotosById } from '../../store/actions'
 
 export default function PicDetail() {
     let {id} = useParams()
 
-    const [pic, setPic] = useState('')
-    const [profilePic, setProfilePic] = useState()
-    const [name, SetName] = useState('username')
-    const [linkDownload, setLinkDownload] = useState('')
+    // const [pic, setPic] = useState('')
+    // const [profilePic, setProfilePic] = useState()
+    // const [name, SetName] = useState('username')
+    // const [linkDownload, setLinkDownload] = useState('')
 
-    function getPhotoByid(){
-        axios({
-            method: 'get',
-            url: `/photos/${id}`
-        })
-        .then(({data}) => {
-            console.log(data.links.download);
-            setProfilePic(data.user.profile_image.medium)
-            setPic(data.urls.raw)
-            SetName(data.user.username)
-            setLinkDownload(data.links.download + '?force=true')
-        })
-        .catch(console.log)
-    }
+    const dispatch = useDispatch()
+    const {pic, profilePic, name, linkDownload} = useSelector(state => state.picture )
 
     useEffect(()=>{
-        getPhotoByid()
+        dispatch(getPhotosById(id))
     }, [])    
 
     return (
@@ -48,7 +37,7 @@ export default function PicDetail() {
                 </div>
 
                 <div>
-                    <button className="mx-1 border btn btn-light"><i class="fas fa-heart"></i></button>
+                    <button className="mx-1 border btn btn-light"><i className="fas fa-heart"></i></button>
                     <button className="mx-1 border btn btn-light">+ collect</button>
                     <a href={linkDownload}> <button className="mx-1 border btn btn-light">download</button> </a>
                 </div>

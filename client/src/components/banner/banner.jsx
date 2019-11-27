@@ -15,12 +15,12 @@ export default function Banner (props) {
   let history = useHistory()
   
   function handleSubmit(){
-    history.push(`/q=${keyword}`)
+    history.push(`/?q=${keyword}`)
     setKeyword('')
   }
 
   useEffect(()=>{
-    let random = Math.floor(Math.random() * 11)
+    let random = Math.floor(Math.random() * 10)
     axios({
       method: 'get',
       url: '/search/photos?query=wallpapers&per_page=10'
