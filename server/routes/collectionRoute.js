@@ -1,7 +1,9 @@
 const router = require('express').Router()
-const UserController = require('../controllers/UserController')
+const CollectionController = require('../controllers/CollectionController')
+const { authentication, authorization } = require('../middleware/auth')
 
-router.post('/:id', UserController.register)
-router.delete('/:id', UserController.login)
+router.get('/', authentication, CollectionController.find)
+router.post('/:id', authentication, CollectionController.add)
+router.delete('/:id', authentication, authorization, CollectionController.remove)
 
 module.exports = router

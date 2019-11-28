@@ -30,7 +30,7 @@ class App extends Component {
               </PrivateRoute>
               
               <Route path="/login">
-                { localStorage.getItem('token') ? <Redirect to="/" /> : <Login />}
+                { !localStorage.getItem('token') ? <Login /> : <Redirect to="/" />}
               </Route>
 
               <Route path="/try">

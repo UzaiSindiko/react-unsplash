@@ -4,7 +4,7 @@ import {
     Redirect,
     useLocation
   } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 export default function PrivateRoute(props) {
     const location = useLocation()

@@ -10,7 +10,7 @@ import {
 
 export default function Banner (props) {
 
-  const dispacth = useDispatch()
+  const dispatch = useDispatch()
   const { bgImage } = useSelector(state => state.picture )
 
   const [keyword, setKeyword] = useState('')
@@ -22,7 +22,7 @@ export default function Banner (props) {
   }
 
   useEffect(()=>{
-    dispacth(getBg())
+    dispatch(getBg())
   }, [])
   
   return (<div style={bgImage} className="con d-flex align-items-center justify-content-center">

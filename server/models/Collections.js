@@ -9,7 +9,12 @@ const collectionSchema = new Schema({
     },
     photosId: {
         type: String,
+        required: true
+    },
+    url: {
+        type: String,
+        required: true
     }
 }, { timestamps: true })
 
-module.exports = mongoose.model('Wishlist', collectionSchema)
+module.exports = mongoose.model('Collection', collectionSchema)

@@ -1,5 +1,6 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+// import thunk from 'redux-thunk'
+import customMiddleware from './customMiddleware'
 
 const initCount = {
     count: 0
@@ -85,8 +86,35 @@ function users( state = initUsers, action ){
     }
 }
 
-const rootReducer = combineReducers({ counter, picture, users })
+const initCollection = {
+    photos: [],
+}
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+function collection ( state = initCollection, action ){
+    switch (action.type) {
+        case 'SHOW':
+            return {
+                ...state,
+                photos: action.photos
+            }
+        case 'ADD':
+            return {
+                ...state,
+                photos: action.photos
+            }
+        case 'REMOVE':
+            return {
+                ...state,
+                photos: action.photos
+            }
+    
+        default:
+            return state
+    }
+}
+
+const rootReducer = combineReducers({ counter, picture, users, collection })
+
+const store = createStore(rootReducer, applyMiddleware(customMiddleware))
 
 export default store

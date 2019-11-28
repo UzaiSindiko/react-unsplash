@@ -3,8 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { getBg, login, register } from '../../store/actions'
 import {
     useLocation,
-    useHistory,
-    Link
+    useHistory
   } from "react-router-dom";
 import './Login.css'
 
@@ -14,25 +13,25 @@ export default function Login(props) {
     const [password, setPassword] = useState('')
     const [loginFrom, setLoginForm] = useState(true)
 
-    const dispacth = useDispatch()
+    const dispatch = useDispatch()
     const { bgImage } = useSelector(state => state.picture )
 
     const location = useLocation()
     const history = useHistory()
 
     useEffect(()=>{
-        dispacth(getBg())
+        dispatch(getBg())
     }, [])
 
 
     function handleLogin(){
-        dispacth(login({ email, password, history, location }))
+        dispatch(login({ email, password, history, location }))
         setEmail("")
         setPassword("")
     }
 
     function handleRegister(){
-        dispacth(register({ email, password, history, location }))
+        dispatch(register({ email, password, history, location }))
         setEmail("")
         setPassword("")
     }

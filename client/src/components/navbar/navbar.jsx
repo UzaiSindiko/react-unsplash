@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import './navbar.css'
 import {
   Link,
   useHistory
 } from "react-router-dom";
+import { logout } from '../../store/actions'
 
 export default function Navbar (props) {
   const [keyword, setKeyword] = useState('')
-
+  const {isLogin} = useSelector( state => state.users )
+  const dispatch = useDispatch()
   let history = useHistory()
 
   function handleSubmit(){
@@ -36,7 +39,8 @@ export default function Navbar (props) {
             </form>
             <div className="link" >
                 <Link to="/"><span>Home</span></Link>
-                <Link to="/collections"><span>Collections</span></Link>
+                { isLogin ? <> <Link to="/collections"><span>Collections</span></Link>  <button onClick={ () => dispatch(logout()) } className="btn btn-dark">Logout</button> </>: <Link to="/login"><button className="btn btn-dark">Login</button></Link>}
+                
             </div>
           </div>
           <div className="search-word d-flex justify-content-between">

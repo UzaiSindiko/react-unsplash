@@ -5,7 +5,7 @@ import {
     useParams
   } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux'
-import { getPhotosById } from '../../store/actions'
+import { getPhotosById, addCol } from '../../store/actions'
 
 export default function PicDetail() {
     let {id} = useParams()
@@ -20,7 +20,7 @@ export default function PicDetail() {
 
     useEffect(()=>{
         dispatch(getPhotosById(id))
-    }, [])    
+    }, [])
 
     return (
         <div className="pic-detail-con d-flex align-items-center justify-content-center">
@@ -38,8 +38,8 @@ export default function PicDetail() {
 
                 <div>
                     <button className="mx-1 border btn btn-light"><i className="fas fa-heart"></i></button>
-                    <button className="mx-1 border btn btn-light">+ collect</button>
-                    <a href={linkDownload}> <button className="mx-1 border btn btn-light">download</button> </a>
+                    <button onClick={() => dispatch(addCol({id, url:pic })) } className="mx-1 border btn btn-light">+ collect</button>
+                    <a href={linkDownload} onClick={e => e.preventDefault()  }> <button className="mx-1 border btn btn-light">download</button> </a>
                 </div>
                 
                 </div>
